@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.aslh</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <parent>
+        <!-- Your own config should inherit from spring-boot-starter-parent -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.2.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <artifactId>phoenix-backend</artifactId>
+    <name>Phoenix Backend</name>
+    <description>Phoenix Backend</description>
+    <properties>
+        <main.basedir>${basedir}/../..</main.basedir>
+        <java.version>1.8</java.version>
+        <jetty.version>9.3.16.v20170120</jetty.version>
+        <cxf.version>3.1.9</cxf.version>
+        <jacoco-maven-plugin.version>0.7.4.201502262128</jacoco-maven-plugin.version>
+        <mockito.version>2.5.7</mockito.version>
+    </properties>
+
+    <repositories>
+
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.snmp4j</groupId>
+            <artifactId>snmp4j</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>${cxf.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jersey2-jaxrs</artifactId>
+            <version>1.5.10</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.swagger2markup</groupId>
+            <artifactId>swagger2markup</artifactId>
+            <version>1.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>nl.jworks.markdown_to_asciidoc</groupId>
+                    <artifactId>markdown_to_asciidoc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>${cxf.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.restito</groupId>
+            <artifactId>restito</artifactId>
+            <version>0.8.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.7</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Deployment -->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://10.86.4.87:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://10.86.4.87:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build><!--<profile>
+            <id>sonar</id>
+            <properties>
+                &lt;!&ndash; Basic sonar properties are configured on jenkins, no need to specify
+                    them here &ndash;&gt;
+                &lt;!&ndash; Build properties &ndash;&gt;
+                <sonar.language>java</sonar.language>
+                <sonar.verbose>false</sonar.verbose>
+                <sonar.sources>src/main/java</sonar.sources>
+                <sonar.tests>src/test/java</sonar.tests>
+                <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+                <sonar.branch>${env.GIT_BRANCH}</sonar.branch>
+
+                &lt;!&ndash; Sonar exclusions &ndash;&gt;
+                <sonar.exclusions>
+                    **/*Config.java
+                </sonar.exclusions>
+
+                &lt;!&ndash; file/directory names &ndash;&gt;
+                <it.reports.dir>reports/jacoco</it.reports.dir>
+                <it.merged.data.file>jacoco-merged.exec</it.merged.data.file>
+                <ut.data.file>jacoco-unit.exec</ut.data.file>
+
+                &lt;!&ndash; Sonar jacoco &ndash;&gt;
+                <sonar.jacoco.reportPath>${project.build.directory}/${ut.data.file}</sonar.jacoco.reportPath>
+                <sonar.jacoco.itReportPath>${it.reports.dir}/${it.merged.data.file}</sonar.jacoco.itReportPath>
+                <sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+            <fork>true</fork>
+            <executable>C:\Program Files\Java\jdk1.7.0_45\bin\javac.exe</executable>
+        </configuration>
+    </plugin>
+</plugins>
+        </build>
+        </profile>-->
+    <profiles>
+
+    </profiles>
+</project>

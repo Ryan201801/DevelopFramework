@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <property name="LOG_PATH" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}"/>
+
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <!--<encoder class="wl.qos.logback.core.encoder.LayoutWrappingEncoder">-->
+            <!--<layout class="LogLayout"/>-->
+        <!--</encoder>-->
+        <encoder class="com.ryan.log.encoder.JsonEncoder"/>
+    </appender>
+
+    <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/phoenix-backend-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxHistory>3</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.ryan.log.layout.LogLayout"/>
+        </encoder>
+    </appender>
+
+    <appender name="asyncFile" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>50000</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="fileAppender"/>
+    </appender>
+
+    <appender name="asyncConsole" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>50000</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="consoleAppender"/>
+    </appender>
+
+    <!--日志上色Ryan↓↓↓-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder>
+            <pattern>[%thread] %highlight(%-5level) %cyan(%logger{15}) - %highlight(%msg) %n</pattern>
+        </encoder>
+    </appender>
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+    <!--日志上色Ryan↑↑↑-->
+
+    <springProfile name="local">
+        <root level="INFO">
+            <!--<appender-ref ref="asyncConsole"/>-->
+            <appender-ref ref="asyncFile"/>
+        </root>
+
+        <logger name="com.allianz.phoenix" level="INFO" additivity="false">
+            <!--<appender-ref ref="asyncConsole"/>-->
+            <appender-ref ref="asyncFile"/>
+        </logger>
+
+        <!--<logger name="org.hibernate.SQL" level="DEBUG" additivity="false">-->
+            <!--&lt;!&ndash;<appender-ref ref="asyncConsole"/>&ndash;&gt;-->
+            <!--<appender-ref ref="asyncFile"/>-->
+        <!--</logger>-->
+    </springProfile>
+
+    <springProfile name="default">
+        <root level="INFO">
+            <appender-ref ref="asyncConsole"/>
+            <!--<appender-ref ref="asyncFile"/>-->
+        </root>
+
+        <logger name="com.allianz.phoenix" level="INFO" additivity="false">
+            <appender-ref ref="asyncConsole"/>
+            <!--<appender-ref ref="asyncFile"/>-->
+        </logger>
+
+        <!--<logger name="org.hibernate.SQL" level="DEBUG" additivity="false">-->
+            <!--<appender-ref ref="asyncConsole"/>-->
+            <!--&lt;!&ndash;<appender-ref ref="asyncFile"/>&ndash;&gt;-->
+        <!--</logger>-->
+    </springProfile>
+</configuration>

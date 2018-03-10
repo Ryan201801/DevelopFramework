@@ -1,0 +1,49 @@
+# Application
+server.servlet-path: /
+server.port: 8080
+system.allianz.phoenix.artifactId: @project.artifactId@
+system.allianz.phoenix.version: @project.version@
+spring.application.name: decelop-framework
+spring.jersey.application-path: /api/allianz/phoenix
+
+# Cache
+spring.cache.cache-names: component
+spring.cache.caffeine.spec: maximumSize=500,expireAfterWrite=10s
+
+# database
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/develop_framework?characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    dbcp2:
+      max-idle: 15
+      min-idle: 1
+      max-total: 30
+      initial-size: 5
+      max-wait-millis: 10000
+# Log
+logging.path: /tmp
+
+endpoints:
+  enabled: false
+  info:
+      enabled: true
+  health:
+      enabled: true
+  metrics:
+      enabled: true
+
+info:
+  app:
+    name: @project.artifactId@
+  build:
+    version: @project.version@
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: zaasdjfweriouv
+    password: zaasdjfweriouv

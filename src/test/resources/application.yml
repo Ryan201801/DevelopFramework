@@ -1,0 +1,22 @@
+# Application
+server.servlet-path: /
+server.port: 8082
+system.allianz.phoenix.artifactId: phoenix-backend
+system.allianz.phoenix.version: 1.0.0-SANPSHOT
+spring.application.name: phoenix-backend
+spring.jersey.application-path: /api/allianz/phoenix
+
+# SMS business info
+SMS.baseurl: http://gateway.onewaysms.com.my:10001/api.aspx
+SMS.apiusername: APIZVOXU37GO7
+SMS.apipassword: APIZVOXU37GO7ZVOXU
+SMS.senderid: onewaysms
+SMS.languagetype: 1
+
+# Test Env
+test.token: dGVzdDp0ZXN0
+
+# Db
+#spring.datasource.name: scratchdb
+#spring.jpa.generate-ddl: false
+#spring.jpa.hibernate.ddl-auto: none
